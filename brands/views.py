@@ -23,3 +23,4 @@ class BrandCreateView(CreateView):
     template_name = 'brand_create.html'
     form_class = forms.BrandForm
     success_url = reverse_lazy('brand_list')
+
