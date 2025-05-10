@@ -1,13 +1,14 @@
 from typing import Any
 from django.db.models.query import QuerySet
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from . import models, forms
 
 class BrandListView(ListView):
     model = models.Brand
     template_name = 'brand_list.html'
     context_object_name = 'brands'
+    paginate_by = 9
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -27,4 +28,16 @@ class BrandCreateView(CreateView):
 class BrandDetailView(DetailView):
     model = models.Brand
     template_name = 'brand_detail.html'
+
+class BrandUpdateView(UpdateView):
+    model = models.Brand
+    template_name = 'brand_update.html' 
+    form_class = forms.BrandForm
+    success_url = reverse_lazy('brand_list')
+
+class BrandDeleteView(DeleteView):
+    model = models.Brand
+    template_name = 'brand_delete.html'
+    success_url = reverse_lazy('brand_list')
     
+

@@ -13,7 +13,7 @@ class BrandForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
 
         }
-        Labels = {
+        labels= {
             'name': 'Nome',
             'description': 'Descrição',
         }
