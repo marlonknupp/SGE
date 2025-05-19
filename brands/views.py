@@ -1,14 +1,17 @@
+from rest_framework import generics
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from typing import Any
 from django.db.models.query import QuerySet
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
-from . import models, forms
+from . import models, forms, serializers
 
-class BrandListView(ListView):
+class BrandListView(LoginRequiredMixin,PermissionRequiredMixin, ListView):
     model = models.Brand
     template_name = 'brand_list.html'
     context_object_name = 'brands'
     paginate_by = 9
+    permission_required = 'brands.view_brand'
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -19,25 +22,40 @@ class BrandListView(ListView):
 
         return queryset
 
-class BrandCreateView(CreateView):
+class BrandCreateView(LoginRequiredMixin,PermissionRequiredMixin, CreateView):
     model = models.Brand
     template_name = 'brand_create.html'
     form_class = forms.BrandForm
     success_url = reverse_lazy('brand_list')
+    permission_required = 'brands.add_brand'
 
-class BrandDetailView(DetailView):
+
+class BrandDetailView(LoginRequiredMixin,PermissionRequiredMixin, DetailView):
     model = models.Brand
-    template_name = 'brand_detail.html'
+    template_name = 'brand.detail.html'
+    permission_required = 'brands.view_brand'
 
-class BrandUpdateView(UpdateView):
+
+class BrandUpdateView(LoginRequiredMixin,PermissionRequiredMixin, UpdateView):
     model = models.Brand
     template_name = 'brand_update.html' 
     form_class = forms.BrandForm
     success_url = reverse_lazy('brand_list')
+    permission_required = 'brands.change_brand'
 
-class BrandDeleteView(DeleteView):
+
+class BrandDeleteView(LoginRequiredMixin,PermissionRequiredMixin, DeleteView):
     model = models.Brand
     template_name = 'brand_delete.html'
     success_url = reverse_lazy('brand_list')
+    permission_required = 'brands.delete_brand'
+
     
 
+class BrandCreateListAPIView(generics.ListCreateAPIView):
+    queryset = models.Brand.objects.all()
+    serializer_class = serializers.BrandSerializer
+
+class BrandRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Brand.objects.all()
+    serializer_class = serializers.BrandSerializer
