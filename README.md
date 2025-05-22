@@ -27,6 +27,9 @@ Sistema completo para controle de estoque, desenvolvido com Django e Bootstrap, 
 2 - Crie o ambiente virtual e ative:
 
 python -m venv venv
+
+3- ativar ambiente virtual
+
 venv\Scripts\activate
 
 3 - Instale as dependências:
