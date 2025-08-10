@@ -1,6 +1,6 @@
 📦 Sistema de Gestão de Estoque (SGE)
 
-Sistema completo para controle de estoque, desenvolvido com Django e Bootstrap, ideal para empresas que precisam organizar entradas, saídas, fornecedores e visualizar métricas em tempo real.
+Sistema completo para controle de estoque, desenvolvido com python, Django e Bootstrap, ideal para empresas que precisam organizar entradas, saídas, fornecedores e visualizar métricas em tempo real.
 
  🔧 Funcionalidades
 
