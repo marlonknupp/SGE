@@ -1,3 +1,4 @@
 [flake8]
-excluide = venv
-ignore = E501
+excluide = venv            #Ignore a pasta do ambiente virtual.
+ignore = E501              # Não reclame de linhas longas com mais de 79 caracteres.
+
